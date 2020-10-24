@@ -20,3 +20,10 @@ node index.js
 
 ## sample page
 /sample.html
+
+## docker
+```
+docker pull nagaomao/sse_sample_server
+docker run -p 3000:8080 -d nagaomao/sse_sample_server
+curl http://localhost:3000/information
+```
