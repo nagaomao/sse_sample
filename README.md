@@ -13,7 +13,7 @@ node index.js
 ### event
 |event|desc|
 |---|---|
-|massage|(nothing)|
+|message|(nothing)|
 |notification|GET /notify|
 |USDJPY|USD/JPY dummy rate|
 |GBPUSD|GBP/USD dummy rate|
