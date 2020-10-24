@@ -9,7 +9,7 @@ app.get('/sample', (req, res) => {
 
 let clientId = 0
 let clients = {}
-app.get('/infomation', function(req, res) {
+app.get('/information', function(req, res) {
   req.socket.setTimeout(Number.MAX_VALUE);
   res.writeHead(200, {
     // text/event-stream を追加
