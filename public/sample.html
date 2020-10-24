@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>通知エリア</h1>
+    <div>
+        <span id='notification'></span>
+    </div>
+
+    <h1>為替</h1>
+    <table>
+        <tr>
+            <td>
+                <input type="checkbox" value="USDJPY" onclick="listenRate(this)">
+            </td>
+            <td>
+                USD/JPY
+            </td>
+            <td>
+                <span id='USDJPY'></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" value="GBPUSD" onclick="listenRate(this)">
+            </td>
+            <td>
+                GBP/USD
+            </td>
+            <td>
+                <span id='GBPUSD'></span>
+            </td>
+        </tr>
+    </table>
+    <script>
+        const INFO_SOURCE = new EventSource("/infomation");
+        var fucntions = {};
+        function listenRate (checkbox) {
+            console.log(checkbox.value);
+            if (checkbox.checked) {
+                var display = document.getElementById(checkbox.value);
+                var rateListener = function (event) {
+                    display.innerText = event.data;
+                }
+                INFO_SOURCE.addEventListener(checkbox.value, rateListener, false);
+                fucntions[checkbox.value] = rateListener;
+                console.log("add:" + checkbox.value);
+            } else {
+                INFO_SOURCE.removeEventListener(checkbox.value, fucntions[checkbox.value], false);
+                console.log("remove:" + checkbox.value);
+            }
+        }
+
+        INFO_SOURCE.addEventListener("notification", function(e){
+            document.getElementById("notification").innerText = "更新されました！";
+        })
+        
+        document.getElementById("notification").addEventListener("mouseover", function(e){
+            this.innerText = "";
+        })
+    </script>
+</body>
+</html>
