@@ -16,6 +16,7 @@ app.get('/information', function(req, res) {
     'Content-Type': 'text/event-stream',
     'Cache-Control': 'no-cache',
     'Connection': 'keep-alive',
+    "Access-Control-Allow-Origin": "*",
   });
   res.write('\n');
   (clientId => {
